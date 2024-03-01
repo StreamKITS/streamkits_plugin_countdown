@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://fonts.cdnfonts.com/css/baby-panda" rel="stylesheet" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: inherit;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        background-color: green;
+        color: white;
+        display: flex;
+        box-sizing: border-box;
+        align-items: center;
+        justify-content: center;
+      }
+      #countdown {
+        font-size: 40vw;
+        display: flex;
+        font-family: 'Baby Panda', sans-serif;
+        transition: all 0.4s;
+        transition-timing-function: cubic-bezier(0.34, 1.61, 0.7, 1);
+      }
+      .separator {
+        margin: 0 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="countdown">
+      <div class="time" id="minutes">00</div>
+      <span class="separator">:</span>
+      <div class="time" id="secondes">00</div>
+    </div>
+    <script>
+      let timer = 120
+      updateCountdown(timer)
+      const interval = setInterval(() => {
+        timer--
+        if (timer < 0) {
+          clearInterval(interval)
+          return
+        }
+        updateCountdown(timer)
+      }, 1000)
+
+      function updateCountdown(timer) {
+        const minutes = Math.floor(timer / 60)
+        const secondes = timer % 60
+        document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0')
+        document.getElementById('secondes').innerHTML = secondes.toString().padStart(2, '0')
+      }
+    </script>
+  </body>
+</html>

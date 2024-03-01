@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+  <body>
+    <style>
+        body {
+            background-color: green;
+        }
+      .countdown {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .countdown svg:not(:root) {
+        overflow: visible;
+      }
+      .countdown svg {
+        height: 150px;
+        padding: 15px;
+        margin: 0 -2px;
+      }
+      .countdown path {
+        stroke: #fff;
+        stroke-width: 4px;
+        fill: none;
+      }
+      .countdown path {
+        transition: d 0.4s;
+        transition-timing-function: cubic-bezier(0.34, 1.61, 0.7, 1);
+      }
+    </style>
+    <section x-data="countdown()" x-init="init">
+      <div class="countdown">
+        <svg xmlns="http://www.w3.org/svg/2000" viewBox="0 0 50 100">
+          <path :d="writeNumber(tenmin)" />
+        </svg>
+        <svg xmlns="http://www.w3.org/svg/2000" viewBox="0 0 50 100">
+          <path :d="writeNumber(min)" />
+        </svg>
+        <svg xmlns="http://www.w3.org/svg/2000" viewBox="0 0 50 100">
+          <path :d="writeNumber(tensec)" />
+        </svg>
+        <svg xmlns="http://www.w3.org/svg/2000" viewBox="0 0 50 100">
+          <path :d="writeNumber(sec)" />
+        </svg>
+      </div>
+    </section>
+    <script type="application/javascript">
+      function countdown() {
+        return {
+          interval: null,
+          countdown: 0,
+          tenmin: 0,
+          min: 0,
+          tensec: 0,
+          sec: 0,
+          writeNumber(nbr) {
+            switch (`${nbr}`) {
+              case "1":
+                return "M50,0 L50,15 L50,30 L50,45 L50,60 L50,75 L50,100";
+              case "2":
+                return "M0,0 L50,0 L50,50 L25,50 L0,50 L0,100 L50,100";
+              case "3":
+                return "M0,0 L50,0 L50,100 L0,100 L50,100 L50,50 L0,50";
+              case "4":
+                return "M0,0 L0,50 L50,50 L50,0 L50,35 L50,70 L50,100";
+              case "5":
+                return "M50,0 L0,0 L0,50 L25,50 L50,50 L50,100 L0,100";
+              case "6":
+                return "M50,0 L0,0 L0,50 L0,100 L50,100, L50,50 L0,50";
+              case "7":
+                return "M0,0 L50,0 L50,20 L50,40 L50,60 L50,80 L50,100";
+              case "8":
+                return "M0,0 L50,0 L50,100 L0,100 L0,0 L0,50 L50,50";
+              case "9":
+                return "M0,100 L50,100 L50,50 L50,0 L0,0 L0,50 L50,50";
+              default:
+                return "M0,0 L50,0 L50,50 L50,100 L0,100 L0,25 L0,0";
+            }
+          },
+          updateCountdown() {
+            var minutesBlock = parseInt(this.countdown / 60, 10)
+              .toString()
+              .split("")
+              .reverse();
+            var secondsBlock = parseInt(this.countdown % 60, 10)
+              .toString()
+              .split("")
+              .reverse();
+            if (this.tenmin !== minutesBlock[1]) this.tenmin = minutesBlock[1];
+            if (this.min !== minutesBlock[0]) this.min = minutesBlock[0];
+            if (this.tensec !== secondsBlock[1]) this.tensec = secondsBlock[1];
+            if (this.sec !== secondsBlock[0]) this.sec = secondsBlock[0];
+          },
+          init() {
+            this.countdown = 60
+            this.updateCountdown();
+            this.interval = setInterval(() => {
+              this.countdown--;
+              if (this.countdown < 0) {
+                clearInterval(this.interval);
+                return
+              }
+              this.updateCountdown();
+            }, 1000);
+          },
+        };
+      }
+    </script>
+  </body>
+</html>

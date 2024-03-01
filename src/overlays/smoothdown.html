@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://fonts.cdnfonts.com/css/baby-panda" rel="stylesheet" />
+    <style>
+      body {
+        background-color: green;
+        color: white;
+      }
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: inherit;
+      }
+      body {
+        display: flex;
+        box-sizing: border-box;
+        background-color: hsl(210, 5%, 12%);
+      }
+      #countdown {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 120px;
+        font-family: "Baby Panda", sans-serif;
+        transition: all 0.4s;
+        transition-timing-function: cubic-bezier(0.34, 1.61, 0.7, 1);
+      }
+      .separator {
+        margin: 0 10px;
+      }
+
+      svg {
+        margin: auto;
+        width: 100vmin;
+      }
+      g > text {
+        text-anchor: middle;
+        font-size: 400px;
+        font-family: Overpass Mono, monospace;
+        fill: hsla(210, 100%, 75%, 0.85);
+        opacity: 0;
+        animation-name: opac;
+        animation-duration: 60s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
+       g > text:nth-child(1) {
+        animation-delay: 0s;
+      }
+      /*
+      g > text:nth-child(2) {
+        animation-delay: 1s;
+      }
+      g > text:nth-child(3) {
+        animation-delay: 2s;
+      }
+      g > text:nth-child(4) {
+        animation-delay: 3s;
+      }
+      g > text:nth-child(5) {
+        animation-delay: 4s;
+      }
+      g > text:nth-child(6) {
+        animation-delay: 5s;
+      }
+      g > text:nth-child(7) {
+        animation-delay: 6s;
+      }
+      g > text:nth-child(8) {
+        animation-delay: 7s;
+      }
+      g > text:nth-child(9) {
+        animation-delay: 8s;
+      }
+      g > text:nth-child(10) {
+        animation-delay: 9s;
+      }
+      g > text:nth-child(11) {
+        animation-delay: 10s;
+      }
+      g > text:nth-child(12) {
+        animation-delay: 11s;
+      } */
+
+      
+@keyframes opac {
+  0% { opacity: 0; }
+  5% { opacity: 1; }
+  10% { opacity: 1; }
+  15% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+    </style>
+  </head>
+  <body>
+    <div id="countdown">
+      <!-- <div class="time" id="minutes">00</div>
+      <span class="separator">:</span>
+      <div class="time" id="secondes">00</div> -->
+      <svg
+        viewBox="-500 -500 1000 1000"
+        width="100%"
+        height="100%"
+        preserveAspectRatio="xMidYMin slice"
+      >
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur
+              in="SourceGraphic"
+              stdDeviation="10"
+              result="blur"
+            ></feGaussianBlur>
+            <feColorMatrix
+              in="blur"
+              mode="matrix"
+              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -5"
+              result="goo"
+            ></feColorMatrix>
+            <feComposite
+              in="SourceGraphic"
+              in2="goo"
+              operator="atop"
+            ></feComposite>
+          </filter>
+        </defs>
+        <circle fill="hsla(0, 100%, 50%, 0.25)" cx="0" cy="0" r="300"></circle>
+        <g filter="url(#goo)">
+          <text x="0" y="150" id="secondes">11</text>
+          <text x="0" y="150" id="secondes">10</text>
+        </g>
+      </svg>
+    </div>
+    <script>
+    //   let timer = 120;
+    //   updateCountdown(timer);
+    //   const interval = setInterval(() => {
+    //     timer--;
+    //     if (timer < 0) {
+    //       clearInterval(interval);
+    //       return;
+    //     }
+    //     updateCountdown(timer);
+    //   }, 1000);
+
+    //   function updateCountdown(timer) {
+    //     const minutes = Math.floor(timer / 60);
+    //     const secondes = timer % 60;
+    //     // document.getElementById("minutes").innerHTML = minutes
+    //     //   .toString()
+    //     //   .padStart(2, "0");
+    //     document.getElementById("secondes").innerHTML = secondes
+    //       .toString()
+    //       .padStart(2, "0");
+    //   }
+    </script>
+  </body>
+</html>
